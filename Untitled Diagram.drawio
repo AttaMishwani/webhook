@@ -90,8 +90,8 @@
             <mxGeometry height="160" width="272.5" x="527.5" y="690" as="geometry" />
           </mxCell>
         </UserObject>
-        <mxCell id="bdRQIAhR4CXSqjTb_yDt-27" parent="1" style="whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);rounded=0;fillColor=light-dark(#FFFFFF,#FF3333);" value="i think i should get all the collections instead of just 50 becuase there could be 80 collections in which the updated product exists,&lt;div&gt;but my current approach works for now becuase i have only 4 or 5 collections&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;possible fix : i can use pagination with graphql to get all the collections&lt;/div&gt;" vertex="1">
-          <mxGeometry height="120" width="265" x="880" y="710" as="geometry" />
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-27" parent="1" style="whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);rounded=0;fillColor=light-dark(#FFFFFF,#FF3333);" value="i think i should get all the collections instead of just 50 becuase there could be 80 collections in which the product exists and needs to be updated,&lt;div&gt;but my current approach works for now becuase i have only 4 or 5 collections&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;possible fix : i can use pagination with graphql to get all the collections&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="310" x="880" y="710" as="geometry" />
         </mxCell>
         <mxCell id="bdRQIAhR4CXSqjTb_yDt-44" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-34" value="">
           <mxGeometry relative="1" as="geometry" />
