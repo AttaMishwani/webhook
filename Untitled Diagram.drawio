@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Page-1" id="_EMYBJRCSWRcJCDBTGRi">
-    <mxGraphModel dx="1557" dy="952" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="983" dy="601" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -22,7 +22,7 @@
         <mxCell id="k8RQzOWZoNkWmCEAPGEG-11" parent="1" style="shape=singleArrow;direction=south;whiteSpace=wrap;html=1;" value="" vertex="1">
           <mxGeometry height="40" width="40" x="100" y="590" as="geometry" />
         </mxCell>
-        <mxCell id="k8RQzOWZoNkWmCEAPGEG-12" parent="1" style="rounded=0;html=1;" value="products return by getProductsByCollection&lt;div&gt;&amp;nbsp;are used by the PorductsList component&lt;/div&gt;" vertex="1">
+        <mxCell id="k8RQzOWZoNkWmCEAPGEG-12" parent="1" style="rounded=0;html=1;" value="products returned by&lt;div&gt;&amp;nbsp;getProductsByCollection(admin, collectionID)&lt;div&gt;&amp;nbsp;are used by the PorductsList component&lt;/div&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="120" width="310" x="50" y="650" as="geometry" />
         </mxCell>
         <mxCell id="k8RQzOWZoNkWmCEAPGEG-13" parent="1" style="shape=singleArrow;direction=south;whiteSpace=wrap;html=1;" value="" vertex="1">
@@ -30,6 +30,182 @@
         </mxCell>
         <mxCell id="k8RQzOWZoNkWmCEAPGEG-14" parent="1" style="rounded=0;html=1;" value="productsList.jsx takes the prorducts&lt;div&gt;&amp;nbsp;as props sort them based on inventory&lt;/div&gt;&lt;div&gt;&amp;nbsp;sorting options before rendering them&lt;/div&gt;" vertex="1">
           <mxGeometry height="120" width="310" x="50" y="850" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="STEP 1" vertex="1">
+          <mxGeometry height="30" width="60" x="150" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="STEP 2" vertex="1">
+          <mxGeometry height="30" width="60" x="160" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="STEP 3" vertex="1">
+          <mxGeometry height="30" width="60" x="160" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="STEP 4" vertex="1">
+          <mxGeometry height="30" width="60" x="150" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-6" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="STEP 5" vertex="1">
+          <mxGeometry height="30" width="60" x="145" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-50" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-14" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=#001DBC;fillColor=#0050ef;align=center;verticalAlign=middle;rounded=0;fontColor=#ffffff;gradientColor=none;fontSize=17;fontStyle=1" value="Webhook Flow" vertex="1">
+          <mxGeometry height="30" width="140" x="593.75" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-82" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-17" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;br&gt;defined webhook subscription in shopify.app.toml&lt;div style=&quot;forced-color-adjust: none; box-shadow: none !important;&quot;&gt;&lt;div style=&quot;forced-color-adjust: none; box-shadow: none !important;&quot;&gt;[[webhooks.subscriptions]]&lt;/div&gt;&lt;div style=&quot;forced-color-adjust: none; box-shadow: none !important;&quot;&gt;topics = [ &quot;products/update&quot; ]&lt;/div&gt;&lt;div style=&quot;forced-color-adjust: none; box-shadow: none !important;&quot;&gt;uri = &quot;/webhooks/products-update&quot;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;forced-color-adjust: none; box-shadow: none !important;&quot;&gt;&lt;br style=&quot;forced-color-adjust: none; box-shadow: none !important;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;forced-color-adjust: none; box-shadow: none !important;&quot;&gt;cli sends webhook subscription using shopify app dev&lt;/div&gt;&lt;div style=&quot;forced-color-adjust: none; box-shadow: none !important;&quot;&gt;&lt;br&gt;&lt;/div&gt;" link="&#xa;defined webhook subscription in shopify.app.toml&lt;div style=&quot;forced-color-adjust: none; box-shadow: none !important;&quot;&gt;&lt;div style=&quot;forced-color-adjust: none; box-shadow: none !important;&quot;&gt;[[webhooks.subscriptions]]&lt;/div&gt;&lt;div style=&quot;forced-color-adjust: none; box-shadow: none !important;&quot;&gt;topics = [ &quot;products/update&quot; ]&lt;/div&gt;&lt;div style=&quot;forced-color-adjust: none; box-shadow: none !important;&quot;&gt;uri = &quot;/webhooks/products-update&quot;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;forced-color-adjust: none; box-shadow: none !important;&quot;&gt;&lt;br style=&quot;forced-color-adjust: none; box-shadow: none !important;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;forced-color-adjust: none; box-shadow: none !important;&quot;&gt;cli sends webhook subscription using shopify app dev&lt;/div&gt;&lt;div style=&quot;forced-color-adjust: none; box-shadow: none !important;&quot;&gt;&lt;br style=&quot;forced-color-adjust: none; box-shadow: none !important; color: rgb(255, 255, 255); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(18, 18, 18); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;&#xa;&#xa;&lt;/div&gt;" id="bdRQIAhR4CXSqjTb_yDt-14">
+          <mxCell parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;labelBackgroundColor=default;labelBorderColor=light-dark(#000000,#4D4D4D);spacingTop=2;spacing=4;" vertex="1">
+            <mxGeometry height="150" width="245" x="541.25" y="100" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-48" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-20" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="Now whenever merchants updates a product inventory, shopify sends a post request to my route webhooks.products-update.jsx" link="&#xa;&lt;span style=&quot;color: rgb(255, 255, 255); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(18, 18, 18); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;Now whenever merchants updates a product inventory, shopify sends a post request to my route webhooks.products-update.jsx&lt;/span&gt;&#xa;&#xa;" id="bdRQIAhR4CXSqjTb_yDt-17">
+          <mxCell parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);" vertex="1">
+            <mxGeometry height="120" width="240" x="543.75" y="290" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-47" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-22" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="action() runs inside&amp;nbsp;&lt;div&gt;webhooks.products-update.jsx&lt;div&gt;&amp;nbsp;destructure {admin , payload} for future use after authenticating the request using authenticate.webhook(request)&lt;/div&gt;&lt;/div&gt;" link="&#xa;&lt;span style=&quot;color: rgb(255, 255, 255); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(18, 18, 18); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;Now whenever merchants updates a product inventory, shopify sends a post request to my route webhooks.products-update.jsx&lt;/span&gt;&#xa;&#xa;" id="bdRQIAhR4CXSqjTb_yDt-19">
+          <mxCell parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);" vertex="1">
+            <mxGeometry height="120" width="240" x="543.75" y="510" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-20" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=light-dark(#FFFFFF,#333333);align=center;verticalAlign=middle;rounded=0;" value="ACTION FUNCTION RUNS" vertex="1">
+          <mxGeometry height="30" width="210" x="558.75" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-41" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-27" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-46" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-31" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="i get productID from payload.id and use that productID to get&amp;nbsp; the first 50 collections in which the current updated products exists using admin.graphql api&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;in response i get an array of collections (stored inside a variable named &quot;collections&quot;) and each array contains collection id and title&lt;/div&gt;" link="&#xa;&lt;span style=&quot;color: rgb(255, 255, 255); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(18, 18, 18); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;Now whenever merchants updates a product inventory, shopify sends a post request to my route webhooks.products-update.jsx&lt;/span&gt;&#xa;&#xa;" id="bdRQIAhR4CXSqjTb_yDt-22">
+          <mxCell parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);" vertex="1">
+            <mxGeometry height="160" width="272.5" x="527.5" y="690" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-27" parent="1" style="whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);rounded=0;fillColor=light-dark(#FFFFFF,#FF3333);" value="i think i should get all the collections instead of just 50 becuase there could be 80 collections in which the updated product exists,&lt;div&gt;but my current approach works for now becuase i have only 4 or 5 collections&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;possible fix : i can use pagination with graphql to get all the collections&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="265" x="880" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-44" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-34" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="for of loops runs for each item&amp;nbsp;&lt;div&gt;(single collections object) inside collections(variable)&lt;/div&gt;" link="&#xa;&lt;span style=&quot;color: rgb(255, 255, 255); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(18, 18, 18); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;Now whenever merchants updates a product inventory, shopify sends a post request to my route webhooks.products-update.jsx&lt;/span&gt;&#xa;&#xa;" id="bdRQIAhR4CXSqjTb_yDt-31">
+          <mxCell parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);" vertex="1">
+            <mxGeometry height="60" width="272.5" x="527.5" y="920" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-32" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=light-dark(#666666,#333333);align=center;verticalAlign=middle;rounded=0;fontFamily=Helvetica;fontSize=12;fontColor=default;" value="for of loop starts" vertex="1">
+          <mxGeometry height="30" width="110" x="680" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-38" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-37" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-43" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-42" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="setCollectionManual(admin, collection.id) runs and sets the current collection in loop sortOrder to manual" link="&#xa;&lt;span style=&quot;color: rgb(255, 255, 255); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(18, 18, 18); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;Now whenever merchants updates a product inventory, shopify sends a post request to my route webhooks.products-update.jsx&lt;/span&gt;&#xa;&#xa;" id="bdRQIAhR4CXSqjTb_yDt-34">
+          <mxCell parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);" vertex="1">
+            <mxGeometry height="60" width="272.5" x="527.5" y="1050" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-37" parent="1" style="whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);rounded=0;fillColor=light-dark(#FFFFFF,#808080);" value="if sortOrder is not set to manual, shopify wont let us mutate the collection using&amp;nbsp; collectionReorderProducts()" vertex="1">
+          <mxGeometry height="60" width="240" x="880" y="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-59" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-58" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-64" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-63" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-42" parent="1" style="whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);rounded=0;" value="now getProductsByCollection(admin, collection.id) function runs and returns all the products of the currnet collection in loop using graphql api with pagination" vertex="1">
+          <mxGeometry height="90" width="270" x="528.75" y="1158" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-51" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="STEP 1" vertex="1">
+          <mxGeometry height="30" width="60" x="543.75" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-52" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="STEP 2" vertex="1">
+          <mxGeometry height="30" width="60" x="543.75" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-53" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="STEP 3" vertex="1">
+          <mxGeometry height="30" width="60" x="483.75" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-54" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="STEP 4" vertex="1">
+          <mxGeometry height="30" width="60" x="527.5" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-55" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="STEP 5" vertex="1">
+          <mxGeometry height="30" width="60" x="527.5" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-56" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="STEP 6" vertex="1">
+          <mxGeometry height="30" width="60" x="527.5" y="1020" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-57" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="STEP 6" vertex="1">
+          <mxGeometry height="30" width="60" x="527.5" y="1128" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-61" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-60" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-58" parent="1" style="whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);rounded=0;fillColor=light-dark(#FFFFFF,#808080);" value="i fetch all the products of the colletion using pagination&amp;nbsp;" vertex="1">
+          <mxGeometry height="80" width="140" x="880" y="1163" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-60" parent="1" style="whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);rounded=0;fillColor=light-dark(#FFFFFF,#FF3333);" value="i think fetching all the products is unnecessary and will add load&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;i need to fix it&amp;nbsp;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="180" x="1080" y="1148" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-67" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-63" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="663.75" y="1460.5000000000002" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-63" parent="1" style="whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);rounded=0;" value="now i sort() the products based on inventory in descending order i got from step 6&amp;nbsp;and save them in a variable named sortedProducts i got from&amp;nbsp;" vertex="1">
+          <mxGeometry height="67" width="270" x="528.75" y="1310" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-65" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="STEP 7" vertex="1">
+          <mxGeometry height="30" width="60" x="528.75" y="1280" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-70" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-68" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-69" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-68" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=light-dark(#FFFFFF,#333333);align=center;verticalAlign=middle;rounded=0;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;" value="&lt;h3&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;reorderCollectionProducts(admin, collection.id, sortedProducts) RUNS&lt;/span&gt;&lt;/h3&gt;" vertex="1">
+          <mxGeometry height="60" width="301.25" x="513.12" y="1470" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-73" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-69" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-72" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-69" parent="1" style="whiteSpace=wrap;html=1;fillColor=default;strokeColor=light-dark(#000000,#4D4D4D);gradientColor=none;rounded=0;fontStyle=0;" value="stores a array in &quot;moves&quot; variable&amp;nbsp;&lt;div&gt;the array contains the newPosition of the sortedProducts&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="298.75" x="514.38" y="1580" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-75" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-72" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-74" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-72" parent="1" style="whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);gradientColor=none;rounded=0;fontStyle=0;" value="graphql mutation runs with collectionReorderProducts() and returns a&lt;div&gt;&amp;nbsp;job {id} in response&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="250" x="538.76" y="1690" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-77" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-74" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-76" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-74" parent="1" style="whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);gradientColor=none;rounded=0;fontStyle=0;" value="reoderCollectionProducts returns const json = await res.json()&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="250" x="539" y="1830" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-79" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-78" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-76" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=light-dark(#666666,#333333);align=center;verticalAlign=middle;rounded=0;fontFamily=Helvetica;fontSize=12;fontColor=default;" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;for of loop ends&lt;/font&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="40" width="210" x="558.74" y="1930" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-81" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-78" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-80" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-78" parent="1" style="whiteSpace=wrap;html=1;fillColor=default;strokeColor=none;gradientColor=none;rounded=0;" value="webhook action function returns&amp;nbsp; : return new Response(null , {status:200})" vertex="1">
+          <mxGeometry height="70" width="240" x="544" y="2010" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-80" parent="1" style="whiteSpace=wrap;html=1;fillColor=light-dark(#666666,#333333);strokeColor=none;gradientColor=none;rounded=0;" value="ACTION FUNCTION ENDS" vertex="1">
+          <mxGeometry height="50" width="260" x="533.74" y="2120" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
