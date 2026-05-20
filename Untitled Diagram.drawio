@@ -91,7 +91,7 @@
           </mxCell>
         </UserObject>
         <mxCell id="bdRQIAhR4CXSqjTb_yDt-27" parent="1" style="whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);rounded=0;fillColor=light-dark(#FFFFFF,#FF3333);" value="i think i should get all the collections instead of just 50 becuase there could be 80 collections in which the product exists and needs to be updated,&lt;div&gt;but my current approach works for now becuase i have only 4 or 5 collections&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;possible fix : i can use pagination with graphql to get all the collections&lt;/div&gt;" vertex="1">
-          <mxGeometry height="160" width="310" x="880" y="710" as="geometry" />
+          <mxGeometry height="160" width="310" x="880" y="690" as="geometry" />
         </mxCell>
         <mxCell id="bdRQIAhR4CXSqjTb_yDt-44" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-34" value="">
           <mxGeometry relative="1" as="geometry" />
@@ -162,6 +162,9 @@
             <mxPoint x="663.75" y="1460.5000000000002" as="targetPoint" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-84" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-63" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-83" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="bdRQIAhR4CXSqjTb_yDt-63" parent="1" style="whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);rounded=0;" value="now i sort() the products based on inventory in descending order i got from step 6&amp;nbsp;and save them in a variable named sortedProducts i got from&amp;nbsp;" vertex="1">
           <mxGeometry height="67" width="270" x="528.75" y="1310" as="geometry" />
         </mxCell>
@@ -201,11 +204,20 @@
         <mxCell id="bdRQIAhR4CXSqjTb_yDt-81" edge="1" parent="1" source="bdRQIAhR4CXSqjTb_yDt-78" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bdRQIAhR4CXSqjTb_yDt-80" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="bdRQIAhR4CXSqjTb_yDt-78" parent="1" style="whiteSpace=wrap;html=1;fillColor=default;strokeColor=none;gradientColor=none;rounded=0;" value="webhook action function returns&amp;nbsp; : return new Response(null , {status:200})" vertex="1">
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-78" parent="1" style="whiteSpace=wrap;html=1;fillColor=default;strokeColor=light-dark(#000000,#4D4D4D);gradientColor=none;rounded=0;" value="webhook action function returns&amp;nbsp; : return new Response(null , {status:200})" vertex="1">
           <mxGeometry height="70" width="240" x="544" y="2010" as="geometry" />
         </mxCell>
         <mxCell id="bdRQIAhR4CXSqjTb_yDt-80" parent="1" style="whiteSpace=wrap;html=1;fillColor=light-dark(#666666,#333333);strokeColor=none;gradientColor=none;rounded=0;" value="ACTION FUNCTION ENDS" vertex="1">
           <mxGeometry height="50" width="260" x="533.74" y="2120" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-83" parent="1" style="whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#4D4D4D);rounded=0;fillColor=light-dark(#FFFFFF,#666666);" value="currently i am only sorting the products based on inventory like from high-to-low , descending order" vertex="1">
+          <mxGeometry height="96.5" width="186.25" x="950" y="1295.25" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-85" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="STEP 8" vertex="1">
+          <mxGeometry height="30" width="60" x="513.12" y="1550" as="geometry" />
+        </mxCell>
+        <mxCell id="bdRQIAhR4CXSqjTb_yDt-86" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="STEP 9" vertex="1">
+          <mxGeometry height="30" width="60" x="539" y="1660" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
