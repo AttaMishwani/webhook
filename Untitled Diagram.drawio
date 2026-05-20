@@ -1,0 +1,37 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="_EMYBJRCSWRcJCDBTGRi">
+    <mxGraphModel dx="1557" dy="952" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="k8RQzOWZoNkWmCEAPGEG-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="app._index mounts&lt;div&gt;loader function runs and fetch all the collections using getCollection() server side function to render in collection option select&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="170" x="40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="k8RQzOWZoNkWmCEAPGEG-7" parent="1" style="shape=singleArrow;direction=south;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="100" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="k8RQzOWZoNkWmCEAPGEG-8" parent="1" style="rounded=0;html=1;whiteSpace=wrap;" value="now when ever a collection is seleted,&lt;div&gt;all the products of the selected&lt;/div&gt;&lt;div&gt;&amp;nbsp;collection are fetch using&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: nowrap;&quot;&gt;getProductsByColletion(admin , collectionId)&amp;nbsp;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="270" x="40" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="k8RQzOWZoNkWmCEAPGEG-9" parent="1" style="shape=singleArrow;direction=south;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="100" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="k8RQzOWZoNkWmCEAPGEG-10" parent="1" style="rounded=0;html=1;" value="getProductsByColletion(admin , collectionId)&amp;nbsp;&lt;br&gt;fetches all the products of selected colletion using&lt;div&gt;&amp;nbsp;admin.grapql api and pagination and returns products&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="310" x="50" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="k8RQzOWZoNkWmCEAPGEG-11" parent="1" style="shape=singleArrow;direction=south;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="100" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="k8RQzOWZoNkWmCEAPGEG-12" parent="1" style="rounded=0;html=1;" value="products return by getProductsByCollection&lt;div&gt;&amp;nbsp;are used by the PorductsList component&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="310" x="50" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="k8RQzOWZoNkWmCEAPGEG-13" parent="1" style="shape=singleArrow;direction=south;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="100" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="k8RQzOWZoNkWmCEAPGEG-14" parent="1" style="rounded=0;html=1;" value="productsList.jsx takes the prorducts&lt;div&gt;&amp;nbsp;as props sort them based on inventory&lt;/div&gt;&lt;div&gt;&amp;nbsp;sorting options before rendering them&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="310" x="50" y="850" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
