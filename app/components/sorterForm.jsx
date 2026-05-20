@@ -1,13 +1,25 @@
 import { useEffect } from "react"
+import { useFetcher } from "react-router"
 
 
 export default function SorterForm({collectionOptions , setSelectedCollectionId , SelectedCollectionId , sortMode , setSortMode}) {
  
-    const handleChange = (e)=>{
-        const val = e.target.value
-setSelectedCollectionId(val)
+  const sortFetcher = useFetcher();
 
-    }
+
+
+  const handleSort = ()=>{
+if(!SelectedCollectionId) return
+
+sortFetcher.submit(
+  {collectionId : SelectedCollectionId , sortMode},
+{method:"POST" , action:"/api/sort-collection" , encType:"application/json"}
+)
+  }
+
+
+  const isSorting = sortFetcher.state !== "idle";
+
     const sortingOptions = [ 
         {label : "Inventory high to low" , value : "inventory-high-to-low"},
         {label : "Inventory low to high" , value :"inventory-low-to-high"},
@@ -24,7 +36,7 @@ setSelectedCollectionId(val)
               label="Select Collection"
               placeholder="Choose a collection"
               value={SelectedCollectionId}
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => setSelectedCollectionId(e.target.value)}
             >
                 {collectionOptions.map((collection)=> (
                     <s-option className="text-black" key={collection.value} value={collection.value}>{collection.label}</s-option>
@@ -46,7 +58,7 @@ setSelectedCollectionId(val)
          
             </s-select>
 
-            <s-button variant="primary">Sort & save to shopify</s-button>
+            <s-button onClick={handleSort} variant="primary" disabled={isSorting}>{isSorting ? "Sorting..." : "Sort & save to shopify"}</s-button>
           </div>
         </s-form>
       </s-section>

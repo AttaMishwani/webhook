@@ -1,0 +1,53 @@
+import { authenticate } from "../shopify.server";
+import {
+  setCollectionManual,
+  getAllCollectionProducts,
+  reorderCollectionProducts
+} from "../services/collection.server";
+
+export async function action({ request }) {
+  const { admin, payload } = await authenticate.webhook(request);
+
+  const productId = `gid://shopify/Product/${payload.id}`;
+  console.log("🔔 Webhook fired for product:", payload.title);
+
+  // Step 1 — Is product ki saari collections fetch karo
+  const res = await admin.graphql(`
+    query GetProductCollections($id: ID!) {
+      product(id: $id) {
+        collections(first: 50) {
+          edges {
+            node { id title }
+          }
+        }
+      }
+    }
+  `, { variables: { id: productId } });
+
+  const json = await res.json();
+  const collections = json.data?.product?.collections?.edges ?? [];
+  console.log(`📦 Product is in ${collections.length} collections`);
+
+  // Step 2 — Har collection ke liye loop
+  for (const { node: collection } of collections) {
+    console.log(`🔄 Processing collection: ${collection.title}`);
+
+    // 2a. MANUAL set karo
+    await setCollectionManual(admin, collection.id);
+
+    // 2b. Saare products fetch karo us collection ke (pagination ke saath)
+    const products = await getAllCollectionProducts(admin, collection.id);
+
+    // 2c. Server pe inventory ke hisaab se sort karo
+    const sorted = [...products].sort(
+      (a, b) => b.totalInventory - a.totalInventory
+    );
+
+    // 2d. Shopify mein naya order save karo
+    await reorderCollectionProducts(admin, collection.id, sorted);
+
+    console.log(`✅ Done: ${collection.title}`);
+  }
+
+  return new Response(null, { status: 200 });
+}

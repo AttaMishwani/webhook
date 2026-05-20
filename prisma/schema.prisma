@@ -34,9 +34,30 @@ model Session {
 }
 
 
-// prisma/schema.prisma
+// To migrate this model to your Prisma database, follow these steps:
+
+// 1. Add the model definition (below) to your `prisma/schema.prisma` file if it's not already there:
 model InventoryUpdate {
-  id        Int      @id @default(autoincrement())
-  shop      String
-  updatedAt DateTime @default(now())
+  id             Int      @id @default(autoincrement())
+  shop           String
+  productId      String
+  productTitle   String
+  totalInventory Int
+  updatedAt      DateTime @default(now())
+}
+
+// 2. Save the `prisma/schema.prisma` file.
+
+// 3. In your terminal, run the following Prisma commands to create and apply the migration:
+//    npx prisma migrate dev --name add-inventory-update
+
+// 4. This will update your SQLite (or selected) database to include the `InventoryUpdate` table.
+
+
+model CollectionSortPreference {
+  id           String   @id @default(cuid())
+  collectionId String   @unique
+  sortMode     String
+  shop         String
+  updatedAt    DateTime @updatedAt
 }
