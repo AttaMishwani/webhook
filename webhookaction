@@ -1,3 +1,16 @@
+model WebhookActivity {
+  id             Int      @id @default(autoincrement())
+  productId      String
+  productTitle   String
+  totalInventory Int
+  productImage   String?
+  collections    String
+  createdAt      DateTime @default(now())
+}
+
+
+
+
 import { authenticate } from "../shopify.server";
 import {
   setCollectionManual,

@@ -5,10 +5,14 @@ import { authenticate } from "../shopify.server";
 
 export async function action({ request }) {
     const { admin, payload } = await authenticate.webhook(request);
-
+    
     const productId = `gid://shopify/Product/${payload.id}`;
+  
+    console.log("FULL PAYLOAD:", payload);
+
 
 console.log(`webhook fired for product: ${payload.title}`);
+console.log("Webhook product id:", payload.id);
 
 
 const res = await admin.graphql(`
@@ -26,7 +30,31 @@ const res = await admin.graphql(`
   const json = await res.json();
   console.log("all collection from webhook : ",json.data.product.collections.edges);
   const collections = json.data?.product?.collections?.edges ?? [];
+  // here we get all the collections the product is in
   console.log(`product is in ${collections.length} collections`);
+
+  const totalInventory = payload.variants.reduce(
+    (total, variant) => total + variant.inventory_quantity,
+    0
+  );
+  
+  const productImage = payload.image?.src || null;
+  
+  const activity = await prisma.WebhookActivity.create({
+    data: {
+      productId,
+      productTitle: payload.title,
+      totalInventory,
+      productImage,
+      collections: JSON.stringify(
+        collections.map((c) => ({
+          id: c.node.id,
+          title: c.node.title,
+        }))
+      ),
+    },
+  });
+  console.log("webhook product data saved to db :" , activity);
 
 for (const {node:collection} of collections){
 
@@ -43,10 +71,7 @@ for (const {node:collection} of collections){
   
   const products = await getProductsByCollection(admin,collection.id);
 
-  console.log(`products returned by getProductsCollection : ${products}`);  
-
-
-
+  console.log(`products returned by getProductsByCollection : ${products}`);  
 
 
      const sortedProducts = [...products].sort((a, b) => {

@@ -1,5 +1,6 @@
 import "../app.css";
 import SorterForm from "../components/SorterForm";
+import WebhookActivity from "../components/WebhookActivity"
 
 import { authenticate } from "../shopify.server";
 import { useLoaderData } from "react-router";
@@ -32,7 +33,7 @@ export default function AppIndex() {
         setSelectedCollectionId={setSelectedCollectionId}
         SelectedCollectionId={selectedCollectionId}
       />
-  
+  <WebhookActivity/>
     </s-page>
   );
 }
