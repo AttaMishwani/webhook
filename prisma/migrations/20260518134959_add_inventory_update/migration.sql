@@ -1,0 +1,6 @@
+-- CreateTable
+CREATE TABLE "InventoryUpdate" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "shop" TEXT NOT NULL,
+    "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
