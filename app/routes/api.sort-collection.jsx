@@ -1,4 +1,4 @@
-import { getProductsByCollection, setCollectionManual } from "app/services/collection.server";
+import { getProductsByCollection, setCollectionManual } from "../services/collection.server";
 import prisma from "../db.server";
 import { authenticate } from "../shopify.server";
 
