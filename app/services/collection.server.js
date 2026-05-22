@@ -106,11 +106,30 @@ export async function getProductsByCollection(admin, collectionId) {
   }
 }
 
-export async function reorderCollectionProducts(admin , collectionId , sortedProducts){
-  const moves = sortedProducts.map((product , index) => ({
-    id:product.id,
-    newPosition : String(index)
-  }))
+export async function reorderCollectionProducts(admin , collectionId , products , productId ,  sortMode){
+
+  const sortedProducts = [...products].sort((a, b) => {
+    if (sortMode === "inventory-high-to-low")
+      return b.totalInventory - a.totalInventory;
+
+    if (sortMode === "inventory-low-to-high")
+      return a.totalInventory - b.totalInventory;
+
+    if (sortMode === "out-of-stock-first")
+      return a.totalInventory === 0 ? -1 : 1;
+
+    return 0;
+  });
+
+  const index = sortedProducts.findIndex((p) => p.id === productId)
+
+  if (index === -1) return;
+
+  const moves = {
+    id: productId,
+    newPosition: String(index),
+  };
+
 
   try {
     const res = await admin.graphql(`
@@ -150,4 +169,89 @@ export async function reorderCollectionProducts(admin , collectionId , sortedPro
     console.log(error)
   }
 
+}
+
+// here i get data of a product and collections a product is present and this data is used in webhook
+export async function getSingleProductData(id, admin) {
+  try {
+    const inventoryItemId = `gid://shopify/InventoryItem/${id}`;
+
+    let collections = [];
+    let hasNextPage = true;
+    let cursor = null;
+
+    let productCache = null;
+    let variantCache = null;
+
+    while (hasNextPage) {
+      const res = await admin.graphql(`
+        query InventoryItemProduct($id: ID!, $cursor: String) {
+          inventoryItem(id: $id) {
+            variant {
+              id
+              inventoryQuantity
+              product {
+                id
+                title
+                featuredImage {
+                  url
+                }
+                collections(first: 250, after: $cursor) {
+                  edges {
+                    cursor
+                    node {
+                      id
+                      title
+                    }
+                  }
+                  pageInfo {
+                    hasNextPage
+                    endCursor
+                  }
+                }
+              }
+            }
+          }
+        }
+      `, {
+        variables: {
+          id: inventoryItemId,
+          cursor,
+        },
+      });
+
+      const json = await res.json();
+
+      const variant = json.data?.inventoryItem?.variant;
+   
+
+      const product = variant.product;
+    
+
+      // store once (same product every loop)
+      productCache = product;
+      variantCache = variant;
+
+      const collectionData = product.collections;
+
+      collections.push(
+        ...collectionData.edges.map((e) => e.node)
+      );
+
+      hasNextPage = collectionData.pageInfo.hasNextPage;
+      cursor = collectionData.pageInfo.endCursor;
+    }
+
+    return {
+      productId: productCache.id,
+      productTitle: productCache.title,
+      totalInventory: variantCache.inventoryQuantity,
+      productImage: productCache.featuredImage?.url || null,
+      collections,
+    };
+
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 }

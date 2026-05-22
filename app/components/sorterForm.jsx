@@ -1,9 +1,9 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useFetcher } from "react-router"
 
 
 export default function SorterForm({collectionOptions , setSelectedCollectionId , SelectedCollectionId , sortMode , setSortMode}) {
- 
+
   const sortFetcher = useFetcher();
 
 
@@ -12,7 +12,7 @@ export default function SorterForm({collectionOptions , setSelectedCollectionId 
 if(!SelectedCollectionId) return
 
 sortFetcher.submit(
-  {collectionId : SelectedCollectionId , sortMode},
+  {collectionId : SelectedCollectionId , sortMode , },
 {method:"POST" , action:"/api/sort-collection" , encType:"application/json"}
 )
   }
@@ -26,12 +26,14 @@ sortFetcher.submit(
         {label : "Out of Stock first" , value:"out-of-stock-first"}
     ]
 
+ 
 
     
     return (
       <s-section>
         <s-form>
           <div className="flex flex-row gap-4 items-end">
+           
             <s-select
               label="Select Collection"
               placeholder="Choose a collection"
