@@ -59,9 +59,17 @@ export async function action({ request }) {
 // for front end
   console.log("Saved activity:", activity);
 
-const shopForDb = await prisma.session.findFirst({
-  where:{shop : {contains : shop }}
-})
+  const shopForDb = await prisma.session.findFirst({
+    where: {
+      shop,           // exact match
+      isOnline: false
+    }
+  });
+
+  if (!shopForDb) {
+    console.error("No offline session found for shop", shop);
+    return new Response(null, { status: 200 });
+  }
 
 //  backend
 // process runs for each collection inside collections variable
@@ -76,15 +84,15 @@ const shopForDb = await prisma.session.findFirst({
       sortPref?.sortMode ?? "inventory-high-to-low";
 
 
-await prisma.SortJob.create({
-  data:{
-    collectionId:collection.id,
-    productId,
-    sortMode,
-    status:"pending",
-    shop : shopForDb.shop
-  }
-})
+      await prisma.sortJob.create({
+        data: {
+          collectionId: collection.id,
+          productId,
+          sortMode,
+          status: "pending",
+          shop: shopForDb.shop, 
+        },
+      });
 
 console.log(`Job created for collection: ${collection.title}`);
 
@@ -99,8 +107,8 @@ console.log(`Job created for collection: ${collection.title}`);
     // await reorderCollectionProducts(admin, collection.id, products , productId ,  sortMode);
 
 
-    // code to be removed from here
-    console.log(`Done collection: ${collection.title}`);
+    
+
     console.log("webhook work ended")
   }
 

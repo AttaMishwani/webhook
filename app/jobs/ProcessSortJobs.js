@@ -1,12 +1,12 @@
 import prisma from "../db.server";
-import shopify from "../shopify.server";
+import { unauthenticated } from "../shopify.server";  // ✅ use this
 import {
+  setCollectionManual,
   getProductsByCollection,
   reorderCollectionProducts,
-  setCollectionManual
 } from "../services/collection.server";
 
-export async function ProcessPendingJobs() {
+export async function ProcessPendingJobs() {  // ✅ lowercase to match export
   const jobs = await prisma.sortJob.findMany({
     where: { status: "pending" },
     take: 10,
@@ -24,19 +24,9 @@ export async function ProcessPendingJobs() {
         data: { status: "processing" },
       });
 
-      const session = await prisma.session.findFirst({
-        where: { shop: job.shop, isOnline: false },
-      });
+      // ✅ Correct way to get admin client outside of request context
+      const { admin } = await unauthenticated.admin(job.shop);
 
-      const { admin } = await shopify.authenticate.admin(
-        new Request(`https://${job.shop}/admin`, {
-          headers: {
-            Authorization: `Bearer ${session.accessToken}`,
-          },
-        })
-      );
-
-      // FIXED: use job.collectionId
       await setCollectionManual(admin, job.collectionId);
 
       const products = await getProductsByCollection(admin, job.collectionId);
@@ -57,11 +47,10 @@ export async function ProcessPendingJobs() {
       console.log(`Job done: ${job.collectionId}`);
     } catch (error) {
       console.error(`Job failed: ${job.id}`, error);
-
       await prisma.sortJob.update({
         where: { id: job.id },
         data: { status: "failed" },
       });
     }
   }
-}
+}   

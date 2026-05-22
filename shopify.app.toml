@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "0400f1cbc2c07323c8ddac4b932a906f"
-application_url = "https://example.com"
+application_url = "https://da35-202-47-41-0.ngrok-free.app"
 embedded = true
 name = "Webhook App"
 
@@ -44,8 +44,6 @@ api_version = "2026-07"
   uri = "/webhooks/app/scopes_update"
   topics = [ "app/scopes_update" ]
 
-[auth]
-redirect_urls = [ "https://example.com/api/auth" ]
 
 [build]
 automatically_update_urls_on_dev = true
@@ -56,3 +54,9 @@ automatically_update_urls_on_dev = true
 [[webhooks.subscriptions]]
 topics = [ "inventory_levels/update" ]
 uri = "/webhooks/inventory-levels-update"
+
+
+[auth]
+redirect_urls = [ 
+  "https://da35-202-47-41-0.ngrok-free.app/auth/callback"
+] 

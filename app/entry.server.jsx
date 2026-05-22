@@ -4,15 +4,24 @@ import { ServerRouter } from "react-router";
 import { createReadableStreamFromReadable } from "@react-router/node";
 import { isbot } from "isbot";
 import { addDocumentResponseHeaders } from "./shopify.server";
-import { ProcessPendingJobs } from "./jobs/ProcessSortJobs";
-
 
 export const streamTimeout = 5000;
 
+// ✅ Dynamically import — sirf server pe, client pe nahi
+if (typeof window === "undefined") {
+  if (!global.__jobIntervalRegistered) {
+    global.__jobIntervalRegistered = true;
 
-
-// Har 30 seconds mein pending jobs check karo
-setInterval(ProcessPendingJobs, 30000);
+    import("./jobs/ProcessSortJobs").then(({ ProcessPendingJobs }) => {
+      if (typeof ProcessPendingJobs === "function") {
+        setInterval(ProcessPendingJobs, 30000);
+        console.log("✅ Background job worker started");
+      } else {
+        console.error("❌ ProcessPendingJobs is not a function");
+      }
+    });
+  }
+}
 
 export default async function handleRequest(
   request,
@@ -51,8 +60,6 @@ export default async function handleRequest(
       },
     );
 
-    // Automatically timeout the React renderer after 6 seconds, which ensures
-    // React has enough time to flush down the rejected boundary contents
     setTimeout(abort, streamTimeout + 1000);
   });
 }
