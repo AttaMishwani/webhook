@@ -72,3 +72,15 @@ model WebhookActivity {
   collections    String
   createdAt      DateTime @default(now())
 }
+
+
+model SortJob {
+  id           String   @id @default(cuid())
+  collectionId String
+  productId    String
+  sortMode     String
+  status       String   @default("pending") // pending, processing, done, failed
+  shop         String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

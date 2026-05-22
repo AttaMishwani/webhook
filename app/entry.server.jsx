@@ -4,8 +4,15 @@ import { ServerRouter } from "react-router";
 import { createReadableStreamFromReadable } from "@react-router/node";
 import { isbot } from "isbot";
 import { addDocumentResponseHeaders } from "./shopify.server";
+import { ProcessPendingJobs } from "./jobs/ProcessSortJobs";
+
 
 export const streamTimeout = 5000;
+
+
+
+// Har 30 seconds mein pending jobs check karo
+setInterval(ProcessPendingJobs, 30000);
 
 export default async function handleRequest(
   request,

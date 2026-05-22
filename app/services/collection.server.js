@@ -106,7 +106,7 @@ export async function getProductsByCollection(admin, collectionId) {
   }
 }
 
-export async function reorderCollectionProducts(admin , collectionId , products , productId ,  sortMode){
+export async function   reorderCollectionProducts(admin , collectionId , products , productId ,  sortMode){
 
   const sortedProducts = [...products].sort((a, b) => {
     if (sortMode === "inventory-high-to-low")

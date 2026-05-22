@@ -10,7 +10,7 @@ import {
 import { authenticate } from "../shopify.server";
 
 export async function action({ request }) {
-  const { admin, payload } = await authenticate.webhook(request);
+  const { admin, payload  ,shop} = await authenticate.webhook(request);
 
   const inventoryItemId = payload.inventory_item_id;
 
@@ -59,6 +59,10 @@ export async function action({ request }) {
 // for front end
   console.log("Saved activity:", activity);
 
+const shopForDb = await prisma.session.findFirst({
+  where:{shop : {contains : shop }}
+})
+
 //  backend
 // process runs for each collection inside collections variable
   for (const collection of collections) {
@@ -71,17 +75,33 @@ export async function action({ request }) {
     const sortMode =
       sortPref?.sortMode ?? "inventory-high-to-low";
 
-    await setCollectionManual(admin, collection.id);
 
-    // here i fetch i all products of the current collection in loop
-    const products = await getProductsByCollection(admin, collection.id);
+await prisma.SortJob.create({
+  data:{
+    collectionId:collection.id,
+    productId,
+    sortMode,
+    status:"pending",
+    shop : shopForDb.shop
+  }
+})
 
-  
+console.log(`Job created for collection: ${collection.title}`);
+
+
+
+    // await setCollectionManual(admin, collection.id);
+
+    
+    // const products = await getProductsByCollection(admin, collection.id);
  
-    // here i am updating the order of products of the current collection in shopify 
-    await reorderCollectionProducts(admin, collection.id, products , productId ,  sortMode);
+    
+    // await reorderCollectionProducts(admin, collection.id, products , productId ,  sortMode);
 
+
+    // code to be removed from here
     console.log(`Done collection: ${collection.title}`);
+    console.log("webhook work ended")
   }
 
   return new Response(null, { status: 200 });

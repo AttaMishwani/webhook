@@ -54,17 +54,23 @@ export default function WebhookActivity() {
                   
                {/* Left — image + info */}
 <div className="flex items-center gap-3">
-  {activity.productImage ? (
-    <img
-      src={activity.productImage}
-      alt={activity.productTitle}
-      className="w-10 h-10 rounded-md object-cover border border-gray-200 flex-shrink-0"
-    />
-  ) : (
-    <div className="w-10 h-10 rounded-md bg-gray-100 flex items-center justify-center flex-shrink-0">
-      <s-icon source="imageAlt" tone="subdued" />
-    </div>
-  )}
+  <s-box inlineSize="100px">
+    {activity.productImage ? (
+      <s-image
+        src={activity.productImage}
+        alt={activity.productTitle}
+        borderWidth="large"
+        borderStyle="solid"
+        borderColor="strong"
+        borderRadius="large"
+        objectFit="cover"
+        aspectRatio="1/1"
+      ></s-image>
+    ) : (
+<div className="flex item-center justify-center"><s-thumbnail alt="No image available" size="large-100"></s-thumbnail></div>       
+    
+    )}
+  </s-box>
 
   <div className="flex flex-col gap-2">
     <s-text variant="bodyMd" fontWeight="semibold">
@@ -76,14 +82,27 @@ export default function WebhookActivity() {
     <s-text variant="bodyMd" fontWeight="semibold">
       Collections: 
     </s-text>
-      {collections.map((c) => (
+      {/* {collections.map((c) => (
         <span
           key={c.id}
           className="text-xs px-2 py-1 rounded-full bg-gray-100 border border-gray-200 text-gray-700"
         >
           {c.title}
         </span>
-      ))}
+      ))} */}
+      {collections && collections.length > 0 ? (
+        collections.map((c) => (
+          <span
+            key={c.id}
+            className="text-xs px-2 py-1 rounded-full bg-gray-100 border border-gray-200 text-gray-700"
+          >
+            {c.title}
+          </span>
+        ))
+      ) : (
+        <s-text>N/A</s-text>
+      )}
+ 
     </div>
   </div>
 </div>
