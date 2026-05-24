@@ -25,7 +25,7 @@ export default function AppIndex() {
   }));
 
   return (
-    <s-page heading="Products">
+    <s-page heading="Collection Sorter">
       <SorterForm
         sortMode={sortMode}
         setSortMode={setSortMode}

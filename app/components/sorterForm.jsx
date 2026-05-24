@@ -1,68 +1,108 @@
-import { useEffect, useState } from "react"
-import { useFetcher } from "react-router"
+import { useFetcher } from "react-router";
 
+const sortingOptions = [
+  { label: "Inventory high to low", value: "inventory-high-to-low" },
+  { label: "Inventory low to high", value: "inventory-low-to-high" },
+  { label: "Out of stock first", value: "out-of-stock-first" },
+];
 
-export default function SorterForm({collectionOptions , setSelectedCollectionId , SelectedCollectionId , sortMode , setSortMode}) {
+const modePills = [
+  { value: "inventory-high-to-low", label: "High to low", icon: "↓" },
+  { value: "inventory-low-to-high", label: "Low to high", icon: "↑" },
+  { value: "out-of-stock-first", label: "OOS first", icon: "⊘" },
+];
 
+export default function SorterForm({
+  collectionOptions,
+  setSelectedCollectionId,
+  SelectedCollectionId,
+  sortMode,
+  setSortMode,
+}) {
   const sortFetcher = useFetcher();
-
-
-
-  const handleSort = ()=>{
-if(!SelectedCollectionId) return
-
-sortFetcher.submit(
-  {collectionId : SelectedCollectionId , sortMode , },
-{method:"POST" , action:"/api/sort-collection" , encType:"application/json"}
-)
-  }
-
-
   const isSorting = sortFetcher.state !== "idle";
+  const isDone = sortFetcher.state === "idle" && sortFetcher.data?.success === true;
 
-    const sortingOptions = [ 
-        {label : "Inventory high to low" , value : "inventory-high-to-low"},
-        {label : "Inventory low to high" , value :"inventory-low-to-high"},
-        {label : "Out of Stock first" , value:"out-of-stock-first"}
-    ]
-
- 
-
-    
-    return (
-      <s-section>
-        <s-form>
-          <div className="flex flex-row gap-4 items-end">
-           
-            <s-select
-              label="Select Collection"
-              placeholder="Choose a collection"
-              value={SelectedCollectionId}
-              onChange={(e) => setSelectedCollectionId(e.target.value)}
-            >
-                {collectionOptions.map((collection)=> (
-                    <s-option className="text-black" key={collection.value} value={collection.value}>{collection.label}</s-option>
-                ))}
-           
-            </s-select>
-  
-            <s-select
-              label="Sort Options"
-              placeholder="e.g. Low to high"
-              value={sortMode}
-              onChange={(e) => setSortMode(e.target.value)}
-            >
-                {
-                    sortingOptions.map((option) => ( 
-                        <s-option className="text-black" value={option.value} key={option.value}>{option.label}</s-option>
-                    ))
-                }
-         
-            </s-select>
-
-            <s-button onClick={handleSort} variant="primary" disabled={isSorting}>{isSorting ? "Sorting..." : "Sort & save to shopify"}</s-button>
-          </div>
-        </s-form>
-      </s-section>
+  const handleSort = () => {
+    if (!SelectedCollectionId) return;
+    sortFetcher.submit(
+      { collectionId: SelectedCollectionId, sortMode },
+      { method: "POST", action: "/api/sort-collection", encType: "application/json" }
     );
-  }
+  };
+
+  return (
+    <s-section>
+      <div className="flex flex-col gap-4">
+
+        {/* Controls row */}
+        <div className="flex flex-row gap-4 items-end">
+          <s-select
+            label="Select Collection"
+            placeholder="Choose a collection"
+            value={SelectedCollectionId}
+            onChange={(e) => setSelectedCollectionId(e.target.value)}
+          >
+            {collectionOptions.map((c) => (
+              <s-option key={c.value} value={c.value}>{c.label}</s-option>
+            ))}
+          </s-select>
+
+          <s-select
+            label="Sort Options"
+            value={sortMode}
+            onChange={(e) => setSortMode(e.target.value)}
+          >
+            {sortingOptions.map((o) => (
+              <s-option key={o.value} value={o.value}>{o.label}</s-option>
+            ))}
+          </s-select>
+
+          <s-button
+            variant="primary"
+            onClick={handleSort}
+            disabled={isSorting || !SelectedCollectionId}
+            loading={isSorting}
+          >
+            {isSorting ? "Sorting…" : isDone ? "✓ Saved!" : "Sort & save to Shopify"}
+          </s-button>
+        </div>
+
+        {/* Quick-pick pills */}
+        <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-gray-100">
+          <span className="text-xs text-gray-400 font-medium">Quick pick:</span>
+          {modePills.map((p) => (
+            <button
+              key={p.value}
+              onClick={() => setSortMode(p.value)}
+              className={[
+                "flex items-center gap-1 text-xs font-medium px-3 py-1 rounded-full border transition-all cursor-pointer",
+                sortMode === p.value
+                  ? "bg-green-50 border-green-300 text-green-700"
+                  : "bg-white border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700",
+              ].join(" ")}
+            >
+              <span className="font-semibold">{p.icon}</span>
+              {p.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Error banner */}
+        {sortFetcher.data?.error && (
+          <s-banner tone="critical">
+            {sortFetcher.data.error}
+          </s-banner>
+        )}
+
+        {/* Success banner */}
+        {isDone && !sortFetcher.data?.error && (
+          <s-banner tone="success">
+            Collection sorted and saved to Shopify successfully.
+          </s-banner>
+        )}
+
+      </div>
+    </s-section>
+  );
+}
