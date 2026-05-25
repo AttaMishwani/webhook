@@ -1,4 +1,5 @@
 import { useFetcher } from "react-router";
+import { useEffect, useState } from "react";
 
 const sortingOptions = [
   { label: "Inventory high to low", value: "inventory-high-to-low" },
@@ -20,8 +21,16 @@ export default function SorterForm({
   setSortMode,
 }) {
   const sortFetcher = useFetcher();
+  const [showSuccess, setShowSuccess] = useState(false);
   const isSorting = sortFetcher.state !== "idle";
-  const isDone = sortFetcher.state === "idle" && sortFetcher.data?.success === true;
+
+  useEffect(() => {
+    if (sortFetcher.state === "idle" && sortFetcher.data?.success === true) {
+      setShowSuccess(true);
+      const timer = setTimeout(() => setShowSuccess(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [sortFetcher.state, sortFetcher.data]);
 
   const handleSort = () => {
     if (!SelectedCollectionId) return;
@@ -64,7 +73,7 @@ export default function SorterForm({
             disabled={isSorting || !SelectedCollectionId}
             loading={isSorting}
           >
-            {isSorting ? "Sorting…" : isDone ? "✓ Saved!" : "Sort & save to Shopify"}
+            {isSorting ? "Sorting…" : showSuccess ? "✓ Saved!" : "Sort & save to Shopify"}
           </s-button>
         </div>
 
@@ -96,7 +105,7 @@ export default function SorterForm({
         )}
 
         {/* Success banner */}
-        {isDone && !sortFetcher.data?.error && (
+        {showSuccess && !sortFetcher.data?.error && (
           <s-banner tone="success">
             Collection sorted and saved to Shopify successfully.
           </s-banner>

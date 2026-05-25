@@ -1,10 +1,7 @@
 // app/routes/webhooks.inventory-levels-update.jsx
 import prisma from "../db.server";
 import {
-  getProductsByCollection,
   getSingleProductData,
-  reorderCollectionProducts,
-  setCollectionManual,
 } from "../services/collection.server";
 
 import { authenticate } from "../shopify.server";
@@ -12,9 +9,10 @@ import { authenticate } from "../shopify.server";
 export async function action({ request }) {
   const { admin, payload  ,shop} = await authenticate.webhook(request);
 
+ 
   const inventoryItemId = payload.inventory_item_id;
 
-  console.log("Inventory item id:", inventoryItemId);
+  
 
   // Get full product data using inventory item id
   const productData = await getSingleProductData(inventoryItemId, admin);
@@ -95,20 +93,6 @@ export async function action({ request }) {
       });
 
 console.log(`Job created for collection: ${collection.title}`);
-
-
-
-    // await setCollectionManual(admin, collection.id);
-
-    
-    // const products = await getProductsByCollection(admin, collection.id);
- 
-    
-    // await reorderCollectionProducts(admin, collection.id, products , productId ,  sortMode);
-
-
-    
-
     console.log("webhook work ended")
   }
 

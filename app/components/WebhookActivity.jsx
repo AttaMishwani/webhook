@@ -69,15 +69,12 @@ export default function WebhookActivity() {
         <s-resource-list>
           {activities.map((activity) => {
             const collections = JSON.parse(activity.collections);
-            const isNew = newIds.has(activity.id);
+            // removed: const isNew = newIds.has(activity.id);
 
             return (
               <s-resource-item key={activity.id}>
                 <div
-                  className={[
-                    "flex items-center justify-between w-full py-4 gap-3  px-1 transition-colors border-b-2 border-gray-200",
-                    isNew ? "bg-green-50" : "",
-                  ].join(" ")}
+                  className="flex items-center justify-between w-full py-4 gap-3  px-1 transition-colors border-b-2 border-gray-200"
                 >
                   {/* Left — image + info */}
                   <div className="flex items-center gap-3 min-w-0">

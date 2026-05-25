@@ -125,10 +125,7 @@ export async function   reorderCollectionProducts(admin , collectionId , product
 
   if (index === -1) return;
 
-  const moves = {
-    id: productId,
-    newPosition: String(index),
-  };
+  const moves = [{ id: productId, newPosition: String(index) }];
 
 
   try {
@@ -221,10 +218,8 @@ export async function getSingleProductData(id, admin) {
       });
 
       const json = await res.json();
-
+      console.log(json)
       const variant = json.data?.inventoryItem?.variant;
-   
-
       const product = variant.product;
     
 
