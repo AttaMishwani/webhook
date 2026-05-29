@@ -1,20 +1,15 @@
 // app/routes/webhooks.inventory-levels-update.jsx
 import prisma from "../db.server";
-import {
-  getSingleProductData,
-} from "../services/collection.server";
-
+import { getSingleProductData } from "../services/collection.server";
 import { authenticate } from "../shopify.server";
+import ProcessPendingJobs from "../jobs/ProcessSortJobs";
 
 export async function action({ request }) {
-  const { admin, payload  ,shop} = await authenticate.webhook(request);
+  const { admin, payload, shop } = await authenticate.webhook(request);
 
- 
   const inventoryItemId = payload.inventory_item_id;
 
-  
 
-  // Get full product data using inventory item id
   const productData = await getSingleProductData(inventoryItemId, admin);
 
   if (!productData) {
@@ -32,19 +27,18 @@ export async function action({ request }) {
 
   console.log("Product dataaaaaaa:", productData);
 
-
-  // for front end
+  // for front end 
   const latestActivity = await prisma.webhookActivity.findFirst({
     where: { productId },
     orderBy: { createdAt: "desc" },
   });
-// for front end
+
   if (latestActivity?.totalInventory === totalInventory) {
     console.log("Duplicate webhook ignored");
     return new Response(null, { status: 200 });
   }
 
-// for front end
+  // for front end 
   const activity = await prisma.webhookActivity.create({
     data: {
       productId,
@@ -54,14 +48,14 @@ export async function action({ request }) {
       collections: JSON.stringify(collections),
     },
   });
-// for front end
   console.log("Saved activity:", activity);
+
 
   const shopForDb = await prisma.session.findFirst({
     where: {
-      shop,           // exact match
-      isOnline: false
-    }
+      shop,
+      isOnline: false,
+    },
   });
 
   if (!shopForDb) {
@@ -69,8 +63,7 @@ export async function action({ request }) {
     return new Response(null, { status: 200 });
   }
 
-//  backend
-// process runs for each collection inside collections variable
+  // backend — create sort jobs for each collection
   for (const collection of collections) {
     console.log(`Processing collection: ${collection.title}`);
 
@@ -78,23 +71,32 @@ export async function action({ request }) {
       where: { collectionId: collection.id },
     });
 
-    const sortMode =
-      sortPref?.sortMode ?? "inventory-high-to-low";
+    if (!sortPref || !sortPref.autoSort) {
+      console.log(`Skipping collection: ${collection.title} — autoSort is off`);
+      continue;
+    }
 
+    const sortMode = sortPref?.sortMode ?? "inventory-high-to-low";
 
-      await prisma.sortJob.create({
-        data: {
-          collectionId: collection.id,
-          productId,
-          sortMode,
-          status: "pending",
-          shop: shopForDb.shop, 
-        },
-      });
+    await prisma.sortJob.create({
+      data: {
+        collectionId: collection.id,
+        productId,
+        sortMode,
+        status: "pending",
+        shop: shopForDb.shop,
+      },
+    });
 
-console.log(`Job created for collection: ${collection.title}`);
-    console.log("webhook work ended")
+    console.log(`Job created for collection: ${collection.title}`);
+    console.log("webhook work ended");
   }
 
-  return new Response(null, { status: 200 });
+
+
+  ProcessPendingJobs()
+    .then(() => console.log("worker running"))
+    .catch((err) => console.log("background job processing error", err));
+
+    return new Response(null, { status: 200 });
 }

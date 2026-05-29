@@ -106,66 +106,48 @@ export async function getProductsByCollection(admin, collectionId) {
   }
 }
 
-export async function   reorderCollectionProducts(admin , collectionId , products , productId ,  sortMode){
+export async function reorderCollectionProducts(admin, collectionId, products, productId, sortMode) {
 
   const sortedProducts = [...products].sort((a, b) => {
     if (sortMode === "inventory-high-to-low")
       return b.totalInventory - a.totalInventory;
-
     if (sortMode === "inventory-low-to-high")
       return a.totalInventory - b.totalInventory;
-
     if (sortMode === "out-of-stock-first")
       return a.totalInventory === 0 ? -1 : 1;
-
     return 0;
   });
 
-  const index = sortedProducts.findIndex((p) => p.id === productId)
-
-  if (index === -1) return;
-
-  const moves = [{ id: productId, newPosition: String(index) }];
-
+  // Saare products ke moves bhejo, sirf ek nahi
+  const moves = sortedProducts.map((product, index) => ({
+    id: product.id,
+    newPosition: String(index),
+  }));
 
   try {
     const res = await admin.graphql(`
       #graphql
-      mutation Reorder($id : ID! , $moves: [MoveInput!]!){
-     collectionReorderProducts(id: $id , moves : $moves){
-     job {id}
-     userErrors {field message}
-     }
-      }
-      `,{
-        variables:{
-          id:collectionId, 
-          moves
+      mutation Reorder($id: ID!, $moves: [MoveInput!]!) {
+        collectionReorderProducts(id: $id, moves: $moves) {
+          job { id }
+          userErrors { field message }
         }
-      });
-
-      const json = await res.json();
-      console.log(`sorted collection by reorderCollectionProducts : ${json} `);
-
-
-      const errors = json.data?.collectionReorderProducts?.userErrors;
-      if (errors?.length) {
-        console.error("❌ reorderCollectionProducts errors:", errors);
       }
+    `, {
+      variables: { id: collectionId, moves }
+    });
 
-
-      console.log("reorderCollectionProducts json data",json.data)
-   
-
-      console.log("✅ Collection reordered, job id:", json.data?.collectionReorderProducts?.job?.id);
-
-      return json.data;
-
+    const json = await res.json();
+    const errors = json.data?.collectionReorderProducts?.userErrors;
+    if (errors?.length) {
+      console.error("❌ reorderCollectionProducts errors:", errors);
+    }
+    console.log("✅ Collection reordered, job id:", json.data?.collectionReorderProducts?.job?.id);
+    return json.data;
 
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
 }
 
 // here i get data of a product and collections a product is present and this data is used in webhook
@@ -218,7 +200,7 @@ export async function getSingleProductData(id, admin) {
       });
 
       const json = await res.json();
-      console.log(json)
+      
       const variant = json.data?.inventoryItem?.variant;
       const product = variant.product;
     

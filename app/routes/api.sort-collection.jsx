@@ -4,22 +4,18 @@ import { authenticate } from "../shopify.server";
 
 export async function action({ request }) {
   const { admin, session } = await authenticate.admin(request);
-  const { collectionId, sortMode } = await request.json();
+  const { collectionId, sortMode , autoSort } = await request.json();
 
  
   
-    await prisma.collectionSortPreference.upsert({
-      where: { collectionId },
-      update: { sortMode },
-      create: { collectionId, sortMode, shop: session.shop },
-    });
+  await prisma.collectionSortPreference.upsert({
+    where: { collectionId },
+    update: { sortMode, autoSort }, 
+    create: { collectionId, sortMode, shop: session.shop, autoSort },
+  });
    
-
- 
     await setCollectionManual(admin, collectionId);
  
- 
-
 
   try {
     const products = await getProductsByCollection(admin, collectionId);

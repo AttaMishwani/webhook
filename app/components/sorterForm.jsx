@@ -21,9 +21,12 @@ export default function SorterForm({
   setSortMode,
 }) {
   const sortFetcher = useFetcher();
+  const preferenceFetcher = useFetcher();
   const [showSuccess, setShowSuccess] = useState(false);
   const isSorting = sortFetcher.state !== "idle";
+  const [autoSort, setAutoSort] = useState(false)
 
+  
   useEffect(() => {
     if (sortFetcher.state === "idle" && sortFetcher.data?.success === true) {
       setShowSuccess(true);
@@ -35,11 +38,36 @@ export default function SorterForm({
   const handleSort = () => {
     if (!SelectedCollectionId) return;
     sortFetcher.submit(
-      { collectionId: SelectedCollectionId, sortMode },
+      { collectionId: SelectedCollectionId, sortMode ,autoSort },
       { method: "POST", action: "/api/sort-collection", encType: "application/json" }
     );
   };
 
+  useEffect(() => {
+  if(!SelectedCollectionId) return
+  
+      preferenceFetcher.load(`/api/collection-preference?collectionId=${SelectedCollectionId}`)
+  
+ 
+  }, [SelectedCollectionId])
+  
+
+  useEffect(() => {
+   if(!preferenceFetcher.data) return;
+
+   const pref = preferenceFetcher.data.sortPreference;
+
+
+
+   if(pref){
+    setAutoSort(pref.autoSort);
+    setSortMode(pref.sortMode);
+   }else{
+    setSortMode("inventory-high-to-low");
+    setAutoSort(false);
+   }
+  }, [preferenceFetcher.data])
+  
   return (
     <s-section>
       <div className="flex flex-col gap-4">
@@ -67,6 +95,13 @@ export default function SorterForm({
             ))}
           </s-select>
 
+
+          <s-checkbox
+  label="Enable auto-sort for this collection"
+  checked={autoSort}
+  onChange={(e) =>  setAutoSort(e.target.checked)}
+  
+/>
           <s-button
             variant="primary"
             onClick={handleSort}

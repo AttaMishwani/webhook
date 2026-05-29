@@ -58,6 +58,7 @@ model CollectionSortPreference {
   id           String   @id @default(cuid())
   collectionId String   @unique
   sortMode     String
+  autoSort     Boolean  @default(false) 
   shop         String
   updatedAt    DateTime @updatedAt
 }

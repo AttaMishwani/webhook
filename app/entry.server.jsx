@@ -7,21 +7,8 @@ import { addDocumentResponseHeaders } from "./shopify.server";
 
 export const streamTimeout = 5000;
 
-// ✅ Dynamically import — sirf server pe, client pe nahi
-if (typeof window === "undefined") {
-  if (!global.__jobIntervalRegistered) {
-    global.__jobIntervalRegistered = true;
-
-    import("./jobs/ProcessSortJobs").then(({ ProcessPendingJobs }) => {
-      if (typeof ProcessPendingJobs === "function") {
-        setInterval(ProcessPendingJobs, 30000);
-        console.log("✅ Background job worker started");
-      } else {
-        console.error("❌ ProcessPendingJobs is not a function");
-      }
-    });
-  }
-}
+// ✅ setInterval removed — ProcessPendingJobs is now called directly
+// inside the webhook handler after every inventory update
 
 export default async function handleRequest(
   request,
