@@ -23,7 +23,11 @@ export async function action({ request }) {
     const sorted = [...products].sort((a, b) => {
       if (sortMode === "inventory-high-to-low") return b.totalInventory - a.totalInventory;
       if (sortMode === "inventory-low-to-high") return a.totalInventory - b.totalInventory;
-      if (sortMode === "out-of-stock-first") return a.totalInventory === 0 ? -1 : 1;
+if (sortMode === "out-of-stock-first") {
+  if (a.totalInventory === 0 && b.totalInventory !== 0) return -1; 
+  if (a.totalInventory !== 0 && b.totalInventory === 0) return 1;  
+  return 0; 
+}
       return 0;
     });
 

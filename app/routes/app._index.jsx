@@ -26,13 +26,13 @@ export default function AppIndex() {
 
   return (
     <s-page heading="Collection Sorter">
-      <SorterForm
+      {/* <SorterForm
         sortMode={sortMode}
         setSortMode={setSortMode}
         collectionOptions={collectionOptions}
         setSelectedCollectionId={setSelectedCollectionId}
         SelectedCollectionId={selectedCollectionId}
-      />
+      /> */}
   <WebhookActivity/>
     </s-page>
   );

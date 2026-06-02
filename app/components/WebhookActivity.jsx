@@ -59,11 +59,9 @@ export default function WebhookActivity() {
     >
       {activities.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-10 gap-2">
-          <s-icon source="inventoryIcon" tone="subdued" />
-          <s-text tone="subdued">No recent inventory updates</s-text>
-          <s-text variant="bodySm" tone="subdued">
-            Updates appear here when Shopify fires inventory webhooks
-          </s-text>
+       <s-spinner accessibilityLabel="looking for update" size="large" />
+          <s-text tone="subdued">Looking for updates</s-text>
+   
         </div>
       ) : (
         <s-resource-list>

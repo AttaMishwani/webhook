@@ -4,7 +4,7 @@ export async function getCollections(admin) {
     const response = await admin.graphql(`
       #graphql
       query GetCollections {
-        collections(first: 50) {
+        collections(first: 250) {
           edges {
             node {
               id
@@ -113,8 +113,12 @@ export async function reorderCollectionProducts(admin, collectionId, products, p
       return b.totalInventory - a.totalInventory;
     if (sortMode === "inventory-low-to-high")
       return a.totalInventory - b.totalInventory;
-    if (sortMode === "out-of-stock-first")
-      return a.totalInventory === 0 ? -1 : 1;
+ 
+if (sortMode === "out-of-stock-first") {
+  if (a.totalInventory === 0 && b.totalInventory !== 0) return -1;
+  if (a.totalInventory !== 0 && b.totalInventory === 0) return 1;  
+  return 0; 
+}
     return 0;
   });
 

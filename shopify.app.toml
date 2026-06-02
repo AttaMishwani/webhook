@@ -18,6 +18,7 @@ api_version = "2026-07"
   [[webhooks.subscriptions]]
   uri = "/webhooks/inventory-levels-update"
   topics = [ "inventory_levels/update" ]
+  include_fields = ["inventory_item_id", "available", "updated_at"]
 
   [[webhooks.subscriptions]]
   uri = "/webhooks/app/uninstalled"
